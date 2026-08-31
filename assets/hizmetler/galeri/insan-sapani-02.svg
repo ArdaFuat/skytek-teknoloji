@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="120 78 820 492" preserveAspectRatio="xMidYMid slice" role="img" aria-label="insan-sapani galeri görünümü 02 - İnsan sapanı illüstrasyonu">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#dff4e6"/><stop offset=".5" stop-color="#eef6e9"/><stop offset="1" stop-color="#f8edcf"/></linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#0a3a37"/><stop offset="1" stop-color="#102a28"/></linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#dbe4e0"/><stop offset=".48" stop-color="#7f918d"/><stop offset="1" stop-color="#eff5f1"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#041b19" flood-opacity=".18"/></filter>
+  </defs>
+  <rect width="1200" height="720" rx="34" fill="url(#sky)"/>
+  <circle cx="980" cy="116" r="58" fill="#b7ff63" opacity=".75"/>
+  <path d="M0 520 C170 445 330 478 470 535 C650 608 815 498 1200 470 L1200 720 L0 720Z" fill="url(#ground)"/>
+  <path d="M0 570 C220 520 390 555 535 604 C770 682 920 540 1200 528 L1200 720 L0 720Z" fill="#0d2422" opacity=".7"/>
+  
+  <g filter="url(#shadow)"><path d="M300 555 L425 185" stroke="#153b38" stroke-width="34" stroke-linecap="round"/><path d="M900 555 L775 185" stroke="#153b38" stroke-width="34" stroke-linecap="round"/>
+  <path d="M430 195 Q555 290 600 360 Q645 290 770 195" fill="none" stroke="#b7ff63" stroke-width="14" stroke-linecap="round"/>
+  <path d="M430 195 Q560 315 600 390 Q645 315 770 195" fill="none" stroke="#e7eee9" stroke-width="5"/>
+  <g transform="translate(600 372)"><circle cx="0" cy="-25" r="17" fill="#ff8b47"/><path d="M0 -7 L0 38 M0 8 L-25 23 M0 8 L25 23 M0 38 L-17 66 M0 38 L18 66" stroke="#0c2b29" stroke-width="12" stroke-linecap="round"/><ellipse cx="0" cy="22" rx="34" ry="47" fill="none" stroke="#ff8b47" stroke-width="7"/></g>
+  <path d="M570 435 Q600 470 630 435" fill="none" stroke="#ff8b47" stroke-width="11"/></g>
+
+  <g opacity=".5" fill="#0b3b3a"><circle cx="110" cy="510" r="10"/><circle cx="145" cy="500" r="6"/><circle cx="1040" cy="478" r="9"/></g>
+</svg>
