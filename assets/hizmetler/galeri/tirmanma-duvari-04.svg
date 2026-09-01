@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" preserveAspectRatio="xMidYMid slice" role="img" aria-label="İp emniyetli tırmanma ve auto-belay entegrasyonu">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e5f1eb"/><stop offset="1" stop-color="#f7e9c9"/></linearGradient><filter id="s"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#041b19" flood-opacity=".17"/></filter></defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <g><path d="M170 590 L218 145 L430 112 L555 195 L740 130 L1010 165 L1040 590Z" fill="#f5f0df" stroke="#0b3b3a" stroke-width="12"/>
+  <g fill="#ff8b47"><circle cx="304" cy="262" r="14"/><circle cx="372" cy="202" r="13"/><circle cx="454" cy="319" r="14"/><circle cx="570" cy="258" r="15"/><circle cx="676" cy="199" r="14"/><circle cx="785" cy="305" r="15"/><circle cx="900" cy="230" r="14"/></g>
+  <g stroke="#0b3b3a" stroke-width="9" fill="none"><path d="M330 148 V98 H430"/><path d="M625 142 V88 H724"/><path d="M875 156 V104 H965"/></g>
+  <g fill="#b7ff63" stroke="#0b3b3a" stroke-width="5"><circle cx="330" cy="148" r="16"/><circle cx="625" cy="142" r="16"/><circle cx="875" cy="156" r="16"/></g>
+  <g stroke="#ff8b47" stroke-width="6"><path d="M330 148 V405"/><path d="M625 142 V390"/><path d="M875 156 V410"/></g>
+  <g transform="translate(625 400)"><circle cx="0" cy="-22" r="15" fill="#0b3b3a"/><path d="M0 -4 L0 43 M0 9 L-25 27 M0 9 L24 25 M0 43 L-18 74 M0 43 L19 72" stroke="#102c2a" stroke-width="12" stroke-linecap="round"/><path d="M-12 12 Q0 26 12 12" stroke="#b7ff63" stroke-width="6" fill="none"/></g>
+  <rect x="216" y="572" width="820" height="30" rx="15" fill="#0b3b3a" opacity=".16"/></g>
+  <text x="94" y="92" fill="#0b3b3a" font-family="Arial, sans-serif" font-size="28" font-weight="700">Koruma noktaları • üst ankraj • auto-belay entegrasyonu</text>
+</svg>

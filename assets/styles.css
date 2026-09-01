@@ -1697,3 +1697,34 @@ h3 {
   .project-media-top { padding-top: 28px; padding-bottom: 42px; }
   .project-media-top + .project-detail-section { padding-top: 44px; }
 }
+
+/* === Indoor Tırmanma Duvarı hizmet sayfası === */
+.climbing-system-section { background: #f6f1e8; }
+.climbing-tech-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+.climbing-tech-card { min-width:0; padding:28px; border:1px solid var(--line); border-radius:26px; background:rgba(255,255,255,.58); }
+.climbing-tech-card > span { display:inline-grid; place-items:center; width:44px; height:44px; margin-bottom:22px; border-radius:14px; background:var(--lime); color:var(--deep); font-weight:950; }
+.climbing-tech-card h3 { margin:0 0 11px; color:var(--deep); font-size:22px; }
+.climbing-tech-card p { margin:0; color:var(--muted); line-height:1.65; }
+.climbing-engineering-section .metric { min-height:205px; }
+.climbing-standards-section { background:var(--paper); }
+.climbing-standard-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.climbing-standard-grid > div { padding:24px; border:1px solid var(--line); border-radius:22px; background:rgba(255,255,255,.45); }
+.climbing-standard-grid strong { display:block; margin-bottom:10px; color:var(--deep); font-size:17px; }
+.climbing-standard-grid span { color:var(--muted); line-height:1.6; }
+.climbing-options { margin-top:56px; padding:32px; border:1px solid var(--line); border-radius:28px; background:#fff; display:grid; grid-template-columns:.8fr 1.2fr; gap:32px; align-items:center; }
+.climbing-options h2 { margin-bottom:0; }
+.climbing-option-pills { display:flex; flex-wrap:wrap; gap:10px; }
+.climbing-option-pills span { padding:12px 14px; border-radius:999px; background:#edf2e8; color:var(--deep); font-weight:850; font-size:14px; }
+@media (max-width:980px){ .climbing-tech-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.climbing-standard-grid{grid-template-columns:1fr}.climbing-options{grid-template-columns:1fr;} }
+@media (max-width:620px){ .climbing-tech-grid{grid-template-columns:1fr}.climbing-tech-card{padding:22px}.climbing-options{padding:22px}.climbing-option-pills span{width:100%;border-radius:14px;} }
+
+/* Indoor climbing document visuals */
+.climbing-doc-visual{margin-top:34px}
+.climbing-doc-visual figure{margin:0;background:#fff;border:1px solid rgba(18,39,49,.12);border-radius:22px;overflow:hidden;box-shadow:0 14px 34px rgba(14,34,43,.08)}
+.climbing-doc-visual img{display:block;width:100%;height:auto;object-fit:contain;background:#fff}
+.climbing-doc-visual figcaption{padding:14px 18px 16px;font-size:.92rem;line-height:1.55;color:#5d6970;background:#fff}
+.climbing-doc-visual-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:34px;margin-bottom:34px}
+.climbing-doc-visual-grid .climbing-doc-visual{margin-top:0;min-width:0}
+@media (max-width:760px){.climbing-doc-visual-grid{grid-template-columns:1fr;gap:16px}.climbing-doc-visual{margin-top:22px}.climbing-doc-visual figure{border-radius:16px}.climbing-doc-visual figcaption{padding:12px 14px;font-size:.86rem}}
+.service-detail-gallery .project-gallery-slide.diagram-slide img{object-fit:contain;background:#fff;padding:8px}
+@media (max-width:760px){.service-detail-gallery .project-gallery-slide.diagram-slide img{padding:4px}}

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Indoor tırmanma duvarı - modüler panel ve rota görünümü">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eef6e9"/><stop offset="1" stop-color="#f7edd2"/></linearGradient><filter id="s"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#041b19" flood-opacity=".17"/></filter></defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <g><path d="M130 590 L184 180 L390 126 L520 232 L715 145 L1017 195 L1060 590Z" fill="#f7f1de" stroke="#0b3b3a" stroke-width="12" stroke-linejoin="round"/>
+  <g stroke="#89a29c" stroke-width="4" opacity=".65"><path d="M340 140 L320 590"/><path d="M520 232 L500 590"/><path d="M715 145 L700 590"/><path d="M900 178 L890 590"/></g>
+  <g fill="#ff8b47"><circle cx="280" cy="315" r="15"/><circle cx="355" cy="235" r="13"/><circle cx="435" cy="354" r="16"/><circle cx="545" cy="297" r="14"/><circle cx="625" cy="222" r="16"/><circle cx="724" cy="332" r="15"/><circle cx="825" cy="250" r="14"/><circle cx="920" cy="360" r="15"/></g>
+  <g fill="#5aa79c"><path d="M255 430 l32 -20 29 18 -8 38 -39 4z"/><path d="M493 438 l34 -18 28 22 -12 39 -40 2z"/><path d="M770 430 l36 -17 31 24 -13 40 -41 1z"/></g>
+  <g transform="translate(590 365)"><circle cx="0" cy="-24" r="15" fill="#0b3b3a"/><path d="M0 -6 L0 42 M0 10 L-25 28 M0 10 L25 24 M0 42 L-18 75 M0 42 L19 73" stroke="#102c2a" stroke-width="12" stroke-linecap="round"/><path d="M0 -5 V-118" stroke="#ff8b47" stroke-width="6"/></g></g>
+  <text x="94" y="92" fill="#0b3b3a" font-family="Arial, sans-serif" font-size="28" font-weight="700">Modüler panel geometrisi • route-setting altyapısı</text>
+</svg>

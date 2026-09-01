@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Boulder tırmanma duvarı ve darbe sönümleme alanı">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eff5ef"/><stop offset="1" stop-color="#e9d8b4"/></linearGradient><filter id="s"><feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#041b19" flood-opacity=".16"/></filter></defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <g><path d="M155 525 L205 208 L400 154 L550 215 L670 142 L1005 205 L1040 525Z" fill="#e8efe9" stroke="#0b3b3a" stroke-width="11"/>
+  <g fill="#ff8b47"><circle cx="283" cy="300" r="14"/><circle cx="354" cy="230" r="14"/><circle cx="463" cy="330" r="15"/><circle cx="590" cy="272" r="13"/><circle cx="710" cy="236" r="15"/><circle cx="831" cy="326" r="14"/><circle cx="930" cy="250" r="15"/></g>
+  <g fill="#5aa79c"><path d="M325 410 l32 -17 26 18 -10 34 -38 2z"/><path d="M610 395 l32 -18 29 22 -11 35 -38 1z"/><path d="M835 410 l34 -19 28 18 -7 38 -41 3z"/></g>
+  <rect x="120" y="520" width="960" height="110" rx="30" fill="#0b3b3a"/><rect x="155" y="543" width="280" height="62" rx="18" fill="#d9e6df"/><rect x="460" y="543" width="280" height="62" rx="18" fill="#edf1e9"/><rect x="765" y="543" width="280" height="62" rx="18" fill="#d9e6df"/>
+  <g transform="translate(560 345)"><circle cx="0" cy="-22" r="15" fill="#0b3b3a"/><path d="M0 -4 L0 40 M0 8 L-23 24 M0 8 L24 22 M0 40 L-17 68 M0 40 L18 67" stroke="#102c2a" stroke-width="12" stroke-linecap="round"/></g></g>
+  <text x="94" y="92" fill="#0b3b3a" font-family="Arial, sans-serif" font-size="28" font-weight="700">Boulder geometri • düşme alanı • darbe sönümleme sistemi</text>
+</svg>
