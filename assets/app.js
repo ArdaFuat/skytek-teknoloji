@@ -249,7 +249,9 @@ quoteForm?.addEventListener('submit', (event) => {
 
 
 
-// Geçmiş projeler: fotoğraf geçişi + büyütme
+// Geçmiş projeler: fotoğraf geçişi + büyütme — mobil stabil sürüm
+const skytekMobileQuery = window.matchMedia?.('(max-width: 760px)');
+
 document.querySelectorAll('[data-project-gallery]').forEach((gallery) => {
   const slides = [...gallery.querySelectorAll('[data-project-slide]')];
   const dots = [...gallery.querySelectorAll('[data-project-dot]')];
@@ -262,7 +264,18 @@ document.querySelectorAll('[data-project-gallery]').forEach((gallery) => {
   let active = 0;
   let timer = null;
   let touchStartX = null;
+  let touchStartY = null;
+  let swiped = false;
+  let inViewport = true;
+  let interacting = false;
   const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+  const warmImage = (index) => {
+    const img = slides[(index + slides.length) % slides.length]?.querySelector('img');
+    if (!img) return;
+    img.loading = 'eager';
+    img.decode?.().catch(() => {});
+  };
 
   const show = (index) => {
     active = (index + slides.length) % slides.length;
@@ -280,6 +293,8 @@ document.querySelectorAll('[data-project-gallery]').forEach((gallery) => {
       thumb.setAttribute('aria-current', i === active ? 'true' : 'false');
     });
     if (current) current.textContent = String(active + 1);
+    warmImage(active);
+    warmImage(active + 1);
   };
 
   const stop = () => {
@@ -289,81 +304,148 @@ document.querySelectorAll('[data-project-gallery]').forEach((gallery) => {
 
   const start = () => {
     stop();
-    if (!reducedMotion && slides.length > 1) {
-      timer = window.setInterval(() => show(active + 1), 5200);
-    }
+    if (reducedMotion || slides.length <= 1 || !inViewport || document.hidden || interacting) return;
+    const delay = skytekMobileQuery?.matches ? 6800 : 5200;
+    timer = window.setInterval(() => show(active + 1), delay);
   };
 
-  prev?.addEventListener('click', () => {
-    show(active - 1);
-    start();
-  });
-  next?.addEventListener('click', () => {
-    show(active + 1);
-    start();
-  });
-  dots.forEach((dot, i) => dot.addEventListener('click', () => {
-    show(i);
-    start();
-  }));
-  thumbs.forEach((thumb, i) => thumb.addEventListener('click', () => {
-    show(i);
-    start();
-  }));
+  prev?.addEventListener('click', () => { show(active - 1); start(); });
+  next?.addEventListener('click', () => { show(active + 1); start(); });
+  dots.forEach((dot, i) => dot.addEventListener('click', () => { show(i); start(); }));
+  thumbs.forEach((thumb, i) => thumb.addEventListener('click', () => { show(i); start(); }));
 
-  gallery.addEventListener('mouseenter', stop);
-  gallery.addEventListener('mouseleave', start);
-  gallery.addEventListener('focusin', stop);
-  gallery.addEventListener('focusout', start);
+  gallery.addEventListener('mouseenter', () => { interacting = true; stop(); });
+  gallery.addEventListener('mouseleave', () => { interacting = false; start(); });
+  gallery.addEventListener('focusin', () => { interacting = true; stop(); });
+  gallery.addEventListener('focusout', () => { interacting = false; start(); });
 
   gallery.addEventListener('touchstart', (event) => {
-    touchStartX = event.changedTouches?.[0]?.clientX ?? null;
+    const point = event.changedTouches?.[0];
+    touchStartX = point?.clientX ?? null;
+    touchStartY = point?.clientY ?? null;
+    swiped = false;
+    interacting = true;
     stop();
   }, { passive: true });
+
   gallery.addEventListener('touchend', (event) => {
-    if (touchStartX === null) return start();
-    const endX = event.changedTouches?.[0]?.clientX ?? touchStartX;
-    const delta = endX - touchStartX;
-    if (Math.abs(delta) > 45) show(active + (delta < 0 ? 1 : -1));
+    if (touchStartX === null || touchStartY === null) {
+      interacting = false;
+      return start();
+    }
+    const point = event.changedTouches?.[0];
+    const dx = (point?.clientX ?? touchStartX) - touchStartX;
+    const dy = (point?.clientY ?? touchStartY) - touchStartY;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.15) {
+      swiped = true;
+      show(active + (dx < 0 ? 1 : -1));
+    }
     touchStartX = null;
-    start();
+    touchStartY = null;
+    window.setTimeout(() => { interacting = false; start(); }, 180);
   }, { passive: true });
 
+  // Yatay swipe sonrasında oluşan sentetik click lightbox'ı yanlışlıkla açmasın.
+  gallery.addEventListener('click', (event) => {
+    if (!swiped) return;
+    if (event.target.closest('[data-project-slide]')) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+    swiped = false;
+  }, true);
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      inViewport = entries[0]?.isIntersecting ?? true;
+      if (inViewport) start(); else stop();
+    }, { threshold: 0.18, rootMargin: '120px 0px' });
+    observer.observe(gallery);
+  }
+
+  document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
   show(0);
   start();
 });
 
-// Image carousel: Ne yapıyoruz?
-document.querySelectorAll('[data-service-slider]').forEach((slider) => {
+// Image carousel: Ne yapıyoruz? — swipe + görünürken autoplay
+ document.querySelectorAll('[data-service-slider]').forEach((slider) => {
   const slides = [...slider.querySelectorAll('[data-slide]')];
   const dots = [...slider.querySelectorAll('[data-slider-dot]')];
   const prev = slider.querySelector('[data-slider-prev]');
   const next = slider.querySelector('[data-slider-next]');
   if (!slides.length) return;
+
   let active = 0;
   let timer = null;
+  let touchStartX = null;
+  let touchStartY = null;
+  let inViewport = true;
+  let interacting = false;
   const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+  const warmImage = (index) => {
+    const img = slides[(index + slides.length) % slides.length]?.querySelector('img');
+    if (!img) return;
+    img.loading = 'eager';
+    img.decode?.().catch(() => {});
+  };
 
   const show = (index) => {
     active = (index + slides.length) % slides.length;
-    slides.forEach((slide, i) => slide.classList.toggle('is-active', i === active));
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('is-active', i === active);
+      slide.setAttribute('aria-hidden', i === active ? 'false' : 'true');
+    });
     dots.forEach((dot, i) => {
       dot.classList.toggle('is-active', i === active);
       dot.setAttribute('aria-current', i === active ? 'true' : 'false');
     });
+    warmImage(active);
+    warmImage(active + 1);
   };
+
   const stop = () => { if (timer) window.clearInterval(timer); timer = null; };
   const start = () => {
     stop();
-    if (!reducedMotion) timer = window.setInterval(() => show(active + 1), 4600);
+    if (reducedMotion || slides.length <= 1 || !inViewport || document.hidden || interacting) return;
+    timer = window.setInterval(() => show(active + 1), skytekMobileQuery?.matches ? 6200 : 4600);
   };
+
   prev?.addEventListener('click', () => { show(active - 1); start(); });
   next?.addEventListener('click', () => { show(active + 1); start(); });
   dots.forEach((dot, i) => dot.addEventListener('click', () => { show(i); start(); }));
-  slider.addEventListener('mouseenter', stop);
-  slider.addEventListener('mouseleave', start);
-  slider.addEventListener('focusin', stop);
-  slider.addEventListener('focusout', start);
+
+  slider.addEventListener('mouseenter', () => { interacting = true; stop(); });
+  slider.addEventListener('mouseleave', () => { interacting = false; start(); });
+  slider.addEventListener('focusin', () => { interacting = true; stop(); });
+  slider.addEventListener('focusout', () => { interacting = false; start(); });
+  slider.addEventListener('touchstart', (event) => {
+    const point = event.changedTouches?.[0];
+    touchStartX = point?.clientX ?? null;
+    touchStartY = point?.clientY ?? null;
+    interacting = true;
+    stop();
+  }, { passive: true });
+  slider.addEventListener('touchend', (event) => {
+    const point = event.changedTouches?.[0];
+    if (touchStartX !== null && touchStartY !== null) {
+      const dx = (point?.clientX ?? touchStartX) - touchStartX;
+      const dy = (point?.clientY ?? touchStartY) - touchStartY;
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.15) show(active + (dx < 0 ? 1 : -1));
+    }
+    touchStartX = touchStartY = null;
+    window.setTimeout(() => { interacting = false; start(); }, 180);
+  }, { passive: true });
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      inViewport = entries[0]?.isIntersecting ?? true;
+      if (inViewport) start(); else stop();
+    }, { threshold: 0.18, rootMargin: '120px 0px' });
+    observer.observe(slider);
+  }
+  document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
   show(0);
   start();
 });

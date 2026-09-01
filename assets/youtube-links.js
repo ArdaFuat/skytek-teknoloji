@@ -5,10 +5,6 @@
 window.SKYTEK_YOUTUBE_LINKS = {
   // Bursa Dağyenice Nefes Zipcoaster Projesi
   "zipcoaster-bursa-dagyenice": ["BURAYA_YOUTUBE_LINKI_YAPISTIR_1", "BURAYA_YOUTUBE_LINKI_YAPISTIR_2", "BURAYA_YOUTUBE_LINKI_YAPISTIR_3"],
-  // Bursa Zipcoaster Projesi
-  "zipcoaster-bursa": ["BURAYA_YOUTUBE_LINKI_YAPISTIR_1"],
-  // Ankara Millet Bahçesi Zipcoaster Projesi
-  "zipcoaster-ankara-millet-bahcesi": ["BURAYA_YOUTUBE_LINKI_YAPISTIR_1"],
   // Bosna Hersek Zipcoaster Projesi
   "zipcoaster-bosna-hersek": ["BURAYA_YOUTUBE_LINKI_YAPISTIR_1"],
   // Mersin Hüköy Zipcoaster Projesi

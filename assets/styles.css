@@ -1728,3 +1728,140 @@ h3 {
 @media (max-width:760px){.climbing-doc-visual-grid{grid-template-columns:1fr;gap:16px}.climbing-doc-visual{margin-top:22px}.climbing-doc-visual figure{border-radius:16px}.climbing-doc-visual figcaption{padding:12px 14px;font-size:.86rem}}
 .service-detail-gallery .project-gallery-slide.diagram-slide img{object-fit:contain;background:#fff;padding:8px}
 @media (max-width:760px){.service-detail-gallery .project-gallery-slide.diagram-slide img{padding:4px}}
+
+
+/* === Mobile stability & performance pass 2026-09-02 === */
+html, body { max-width: 100%; overflow-x: clip; }
+.container, .hero-grid, .strip-grid, .strip-grid-visual, .service-grid-wide, .portfolio-grid,
+.page-hero-grid, .detail-two-col, .project-detail-grid, .service-description-layout,
+.project-gallery-slider, .project-gallery-stage, .all-photos-block { min-width: 0; }
+.intro-slider-track, .service-card-media, .project-thumb, .project-gallery-stage { contain: layout paint; }
+.intro-slide, .project-gallery-slide { will-change: opacity; }
+.project-gallery-slide img, .intro-slide img, .service-card-media img, .project-thumb img { backface-visibility: hidden; }
+.project-gallery-slider, .intro-slider { touch-action: pan-y pinch-zoom; }
+.all-photo-thumbs { -webkit-overflow-scrolling: touch; overscroll-behavior-inline: contain; }
+
+@media (max-width: 760px) {
+  html { -webkit-text-size-adjust: 100%; }
+  body { overflow-x: hidden; }
+  .container { width: calc(100% - 24px); }
+  .section-pad { padding: 64px 0; }
+
+  /* Görsel yüklenirken veya yatay/dikey fotoğraf değişirken yükseklik oynamasın. */
+  .intro-slider-track,
+  .project-gallery-stage,
+  .project-gallery-detail .project-gallery-stage,
+  .service-detail-gallery .project-gallery-stage {
+    width: 100%;
+    min-height: 0 !important;
+    aspect-ratio: 4 / 3;
+  }
+  .intro-slide,
+  .project-gallery-slide { overflow: hidden; }
+  .intro-slide img,
+  .project-gallery-slide img,
+  .service-detail-gallery .project-gallery-slide img {
+    width: 100%;
+    height: 100%;
+  }
+  .project-gallery-detail .project-gallery-slide img { object-fit: contain; }
+  .service-detail-gallery .project-gallery-slide img { object-fit: cover; }
+  .service-detail-gallery .project-gallery-slide.diagram-slide img { object-fit: contain; }
+
+  /* Kart görselleri sabit oranlı: içerik geç gelse de sayfa aşağı-yukarı atlamaz. */
+  .service-card-media { aspect-ratio: 16 / 10; }
+  .project-thumb { min-height: 0; aspect-ratio: 16 / 10; }
+  .project-thumb img { min-height: 0; width: 100%; height: 100%; }
+  .gallery-item { min-height: 0; aspect-ratio: 4 / 3; }
+  .gallery-item img { min-height: 0; width: 100%; height: 100%; }
+
+  /* Kontroller görselin ortasını kapatmasın. */
+  .project-gallery-arrow {
+    top: auto;
+    bottom: 10px;
+    width: 42px;
+    height: 42px;
+    transform: none;
+  }
+  .project-gallery-arrow:hover { transform: none; }
+  .project-gallery-prev { left: auto; right: 60px; }
+  .project-gallery-next { right: 10px; }
+  .project-gallery-count { left: 10px; bottom: 10px; }
+  .project-zoom-hint { top: 10px; right: 10px; font-size: 11px; }
+
+  .project-gallery-dots {
+    justify-content: flex-start;
+    min-height: 42px;
+    overflow-x: auto;
+    padding: 12px 4px 8px;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+  }
+  .project-gallery-dots::-webkit-scrollbar,
+  .all-photo-thumbs::-webkit-scrollbar { display: none; }
+  .project-gallery-dots button { flex: 0 0 auto; scroll-snap-align: center; }
+
+  .all-photos-block { overflow: hidden; }
+  .all-photo-thumbs,
+  .service-detail-gallery .all-photo-thumbs {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    gap: 9px;
+    padding: 1px 1px 5px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    touch-action: pan-x;
+  }
+  .all-photo-thumb { flex: 0 0 min(138px, 43vw); scroll-snap-align: start; }
+  .all-photos-head { gap: 10px; }
+  .all-photos-head > div { min-width: 0; }
+  .all-photos-head small { max-width: none; }
+
+  .service-gallery-caption {
+    left: 10px;
+    right: 110px;
+    bottom: 10px;
+    max-width: none;
+    min-width: 0;
+  }
+  .service-gallery-caption small {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Tam ekran galeri mobil ekrandan taşmasın. */
+  .media-modal { padding: 8px; }
+  .media-modal-dialog { width: 100%; max-height: calc(100dvh - 16px); border-radius: 18px; }
+  .media-modal-content { padding: 10px; }
+  .modal-figure img { max-height: 74dvh; border-radius: 12px; }
+  .modal-gallery-arrow { width: 42px; height: 42px; }
+  .modal-gallery-prev { left: 4px; }
+  .modal-gallery-next { right: 4px; }
+  .modal-gallery-caption { gap: 8px; font-size: 12px; }
+  .media-modal-close { top: 8px; right: 8px; width: 40px; height: 40px; }
+
+  /* Hover animasyonları dokunmatik cihazda gereksiz GPU yükü yaratmasın. */
+  .service-card:hover,
+  .portfolio-card:hover,
+  .gallery-item:hover { transform: none; }
+  .service-card:hover .service-card-media img,
+  .portfolio-card:hover .project-thumb img,
+  .project-gallery-slide:hover img { transform: none; }
+
+  .reveal { transform: translateY(12px); transition-duration: .42s; }
+}
+
+@media (max-width: 420px) {
+  .container { width: calc(100% - 20px); }
+  .site-header { width: calc(100% - 16px); }
+  .intro-slide figcaption { left: 18px; right: 78px; bottom: 18px; }
+  .intro-slide figcaption strong { font-size: 22px; }
+  .intro-slide figcaption span { font-size: 12px; }
+  .slider-arrow { width: 40px; height: 40px; bottom: 14px; right: 14px; }
+  .slider-prev { right: 60px; }
+  .service-gallery-caption { right: 104px; }
+  .all-photo-thumb { flex-basis: 126px; }
+}
